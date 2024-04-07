@@ -1,0 +1,25 @@
+<!-- blog/templates/blog/post_list.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+    <div class="container">
+        {% for post in posts %}
+        <article class="post">
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <!-- Вибір між created_date та published_date залежить від ваших потреб -->
+            <p class="date">{{ post.published_date|date:"d M Y" }}</p>
+            <p>{{ post.text|slice:":200" }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</body>
+</html>
